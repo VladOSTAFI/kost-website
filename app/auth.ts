@@ -3,4 +3,4 @@
 export const AUTH_COOKIE = "kost_session";
 export const AUTH_TOKEN = "granted-kostview";
 export const SITE_PASSWORD = "kostview";
-export const AUTH_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
+export const AUTH_MAX_AGE = 60 * 60 * 24; // 24 hours
