@@ -42,7 +42,7 @@ export default function Constellation() {
       // deterministic-ish spread without Math.random dependence on first paint
       ((((Math.sin(i * 12.9898) * 43758.5453) % 1) + 1) % 1) * max;
 
-    function build() {
+    const build = () => {
       const parent = canvas.parentElement;
       width = parent?.clientWidth ?? window.innerWidth;
       height = parent?.clientHeight ?? 480;
@@ -67,14 +67,14 @@ export default function Constellation() {
         rx: 0,
         ry: 0,
       }));
-    }
+    };
 
     const LINK_DIST = 130;
     const MOUSE_LINK = 190;
     const INFLUENCE = 170; // radius the cursor pushes stars within
     const PUSH = 28; // how far stars are nudged away from the cursor
 
-    function frame() {
+    const frame = () => {
       t += 0.012;
       ctx.clearRect(0, 0, width, height);
 
@@ -164,7 +164,7 @@ export default function Constellation() {
 
       ctx.globalAlpha = 1;
       if (!reduced) raf = requestAnimationFrame(frame);
-    }
+    };
 
     build();
     frame();
