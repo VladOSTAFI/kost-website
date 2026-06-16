@@ -23,7 +23,7 @@ const uk: Dictionary = {
     linkedinLabel: "linkedin.com/in/kristina-ostafi",
   },
   stats: [
-    { value: "2+", label: "Роки в управлінні маркетингом" },
+    { value: "6+", label: "Років у SEO та маркетингу" },
     { value: "12+", label: "Одночасних проектів" },
     { value: "10+", label: "Сайтів у SEO-зростанні" },
   ],

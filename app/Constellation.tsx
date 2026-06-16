@@ -11,6 +11,8 @@ type Star = {
   vy: number;
   r: number;
   tw: number; // twinkle phase
+  rx: number; // rendered x (with mouse displacement)
+  ry: number; // rendered y
 };
 
 export default function Constellation() {
@@ -33,9 +35,12 @@ export default function Constellation() {
     let raf = 0;
     let t = 0;
 
+    // smoothed cursor position (relative to canvas)
+    const mouse = { x: 0, y: 0, tx: 0, ty: 0, active: false };
+
     const seed = (i: number, max: number) =>
       // deterministic-ish spread without Math.random dependence on first paint
-      ((Math.sin(i * 12.9898) * 43758.5453) % 1 + 1) % 1 * max;
+      ((((Math.sin(i * 12.9898) * 43758.5453) % 1) + 1) % 1) * max;
 
     function build() {
       const parent = canvas.parentElement;
@@ -59,16 +64,25 @@ export default function Constellation() {
         vy: (seed(i + 5, 1) - 0.5) * 0.22,
         r: 0.9 + seed(i + 11, 1.9),
         tw: seed(i + 13, Math.PI * 2),
+        rx: 0,
+        ry: 0,
       }));
     }
 
     const LINK_DIST = 130;
+    const MOUSE_LINK = 190;
+    const INFLUENCE = 170; // radius the cursor pushes stars within
+    const PUSH = 28; // how far stars are nudged away from the cursor
 
     function frame() {
       t += 0.012;
       ctx.clearRect(0, 0, width, height);
 
-      // move
+      // ease the cursor toward its target for buttery motion
+      mouse.x += (mouse.tx - mouse.x) * 0.14;
+      mouse.y += (mouse.ty - mouse.y) * 0.14;
+
+      // drift + compute rendered (mouse-displaced) positions
       for (const s of stars) {
         if (!reduced) {
           s.x += s.vx;
@@ -78,27 +92,64 @@ export default function Constellation() {
           if (s.y < -20) s.y = height + 20;
           if (s.y > height + 20) s.y = -20;
         }
+
+        let rx = s.x;
+        let ry = s.y;
+        if (mouse.active) {
+          const dx = s.x - mouse.x;
+          const dy = s.y - mouse.y;
+          const d = Math.hypot(dx, dy) || 1;
+          if (d < INFLUENCE) {
+            const f = (1 - d / INFLUENCE) * PUSH;
+            rx += (dx / d) * f;
+            ry += (dy / d) * f;
+          }
+        }
+        s.rx = rx;
+        s.ry = ry;
       }
 
-      // links
+      // star-to-star links
       for (let i = 0; i < stars.length; i++) {
         for (let j = i + 1; j < stars.length; j++) {
           const a = stars[i];
           const b = stars[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
+          const dx = a.rx - b.rx;
+          const dy = a.ry - b.ry;
           const dist = Math.hypot(dx, dy);
           if (dist < LINK_DIST) {
-            const alpha = (1 - dist / LINK_DIST) * 0.7;
             ctx.strokeStyle = ACCENT;
-            ctx.globalAlpha = alpha;
+            ctx.globalAlpha = (1 - dist / LINK_DIST) * 0.7;
             ctx.lineWidth = 0.9;
             ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+            ctx.moveTo(a.rx, a.ry);
+            ctx.lineTo(b.rx, b.ry);
             ctx.stroke();
           }
         }
+      }
+
+      // cursor-to-star links + cursor node
+      if (mouse.active) {
+        for (const s of stars) {
+          const dx = s.rx - mouse.x;
+          const dy = s.ry - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < MOUSE_LINK) {
+            ctx.strokeStyle = ACCENT;
+            ctx.globalAlpha = (1 - dist / MOUSE_LINK) * 0.85;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(s.rx, s.ry);
+            ctx.stroke();
+          }
+        }
+        ctx.globalAlpha = 0.9;
+        ctx.fillStyle = ACCENT;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 2.6, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       // stars
@@ -107,7 +158,7 @@ export default function Constellation() {
         ctx.globalAlpha = twinkle;
         ctx.fillStyle = ACCENT;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.arc(s.rx, s.ry, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -117,6 +168,32 @@ export default function Constellation() {
 
     build();
     frame();
+
+    // ── interaction ──
+    const parent = canvas.parentElement ?? canvas;
+
+    const onMove = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (!mouse.active) {
+        // snap on first entry to avoid a sweep from the corner
+        mouse.x = x;
+        mouse.y = y;
+      }
+      mouse.tx = x;
+      mouse.ty = y;
+      mouse.active = true;
+      // reduced-motion users get no rAF loop, so repaint on demand
+      if (reduced) frame();
+    };
+    const onLeave = () => {
+      mouse.active = false;
+      if (reduced) frame();
+    };
+
+    parent.addEventListener("pointermove", onMove);
+    parent.addEventListener("pointerleave", onLeave);
 
     let resizeTimer = 0;
     const onResize = () => {
@@ -132,14 +209,12 @@ export default function Constellation() {
       cancelAnimationFrame(raf);
       window.clearTimeout(resizeTimer);
       window.removeEventListener("resize", onResize);
+      parent.removeEventListener("pointermove", onMove);
+      parent.removeEventListener("pointerleave", onLeave);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="hero__constellation"
-      aria-hidden="true"
-    />
+    <canvas ref={canvasRef} className="hero__constellation" aria-hidden="true" />
   );
 }

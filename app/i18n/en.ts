@@ -23,7 +23,7 @@ const en: Dictionary = {
     linkedinLabel: "linkedin.com/in/kristina-ostafi",
   },
   stats: [
-    { value: "2+", label: "Years managing marketing" },
+    { value: "6+", label: "Years in SEO & marketing" },
     { value: "12+", label: "Concurrent projects led" },
     { value: "10+", label: "Websites scaled in SEO" },
   ],
