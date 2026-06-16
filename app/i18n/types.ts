@@ -56,4 +56,13 @@ export interface Dictionary {
   education: { school: string; degree: string; period: string };
   languages: LangPair[];
   contact: { kicker: string; headline: string; copyright: string };
+  login: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    label: string;
+    placeholder: string;
+    submit: string;
+    error: string;
+  };
 }

@@ -120,6 +120,15 @@ const en: Dictionary = {
     headline: "Ready to make your marketing measurable?",
     copyright: "© Kristina Ostafi. Built with care.",
   },
+  login: {
+    eyebrow: "Private preview",
+    title: "Enter the password",
+    subtitle: "This page is protected. Enter the password to continue.",
+    label: "Password",
+    placeholder: "Your password",
+    submit: "Unlock",
+    error: "Incorrect password. Please try again.",
+  },
 };
 
 export default en;
