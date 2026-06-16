@@ -1,4 +1,5 @@
 import Reveal from "../Reveal";
+import Constellation from "../Constellation";
 import { getDictionary } from "../i18n/dictionaries";
 import type { Locale } from "../i18n/config";
 
@@ -18,6 +19,7 @@ export default async function Home({
 
       {/* ───────────── HERO ───────────── */}
       <header className="hero">
+        <Constellation />
         <div className="hero__glow" aria-hidden="true" />
         <div className="shell">
           <p className="eyebrow hero__eyebrow">{dict.eyebrow}</p>
