@@ -54,6 +54,7 @@ export interface CaseStudy {
   metrics: CaseMetric[];
   levers: CaseLever[];
   stack: string; // small mono footer line
+  pdf: string; // public path to the full case-study PDF
 }
 
 export interface Dictionary {
@@ -84,6 +85,7 @@ export interface Dictionary {
   experience: ExperienceItem[];
   cases: CaseStudy[];
   caseLeversLabel: string;
+  casePdfLabel: string;
   toolGroups: ToolGroup[];
   detailKickers: { education: string; languages: string };
   education: { school: string; degree: string; period: string };

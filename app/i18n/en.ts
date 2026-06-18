@@ -131,6 +131,7 @@ const en: Dictionary = {
         },
       ],
       stack: "Performance Max · Google Shopping · Display ads · Search Ads",
+      pdf: "/cases/google_ads_usa_case.pdf",
     },
     {
       title: "Premium branded menswear — organic growth from zero",
@@ -179,6 +180,7 @@ const en: Dictionary = {
         },
       ],
       stack: "On-page & Off-page · B2C",
+      pdf: "/cases/seo_premium_menswear_case.pdf",
     },
     {
       title: "B2B crushed stone & sand extraction — organic growth",
@@ -227,9 +229,11 @@ const en: Dictionary = {
         },
       ],
       stack: "SEO · On-page & Off-page · B2B",
+      pdf: "/cases/seo_b2b_quarry_case.pdf",
     },
   ],
   caseLeversLabel: "How it was achieved",
+  casePdfLabel: "View full case (PDF)",
   toolGroups: [
     {
       title: "Analytics & SEO",

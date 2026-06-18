@@ -131,6 +131,7 @@ const uk: Dictionary = {
         },
       ],
       stack: "Performance Max · Google Shopping · Display ads · Search Ads",
+      pdf: "/cases/google_ads_usa_case.pdf",
     },
     {
       title: "Преміум брендовий одяг для чоловіків — органічне зростання з нуля",
@@ -179,6 +180,7 @@ const uk: Dictionary = {
         },
       ],
       stack: "On-page & Off-page · B2C",
+      pdf: "/cases/seo_premium_menswear_case.pdf",
     },
     {
       title: "B2B. Видобуток щебеню та піску — органічне зростання",
@@ -227,9 +229,11 @@ const uk: Dictionary = {
         },
       ],
       stack: "SEO · On-page & Off-page · B2B",
+      pdf: "/cases/seo_b2b_quarry_case.pdf",
     },
   ],
   caseLeversLabel: "За рахунок чого досягнуто результат",
+  casePdfLabel: "Відкрити повний кейс (PDF)",
   toolGroups: [
     {
       title: "Аналітика та SEO",

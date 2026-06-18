@@ -213,7 +213,17 @@ export default async function Home({
                 </ol>
               </div>
 
-              <p className="case__stack">{study.stack}</p>
+              <div className="case__footer">
+                <p className="case__stack">{study.stack}</p>
+                <a
+                  className="case__pdf"
+                  href={study.pdf}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {dict.casePdfLabel} ↗
+                </a>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -288,7 +298,6 @@ export default async function Home({
             <a href={c.linkedin} target="_blank" rel="noreferrer">
               {c.linkedinLabel} ↗
             </a>
-            <span>{c.location}</span>
           </div>
 
           <p className="contact__copyright">{dict.contact.copyright}</p>

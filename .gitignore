@@ -29,6 +29,8 @@ next-env.d.ts
 
 # source CV material (not needed to run the site)
 *.pdf
+# but DO ship the case-study PDFs served by the site
+!public/cases/*.pdf
 
 # env
 .env*.local
