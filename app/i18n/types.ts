@@ -25,6 +25,38 @@ export interface LangPair {
   level: string;
 }
 
+export interface CaseHighlight {
+  value: string;
+  text: string;
+}
+
+export interface CaseMetric {
+  label: string;
+  before: string;
+  after: string;
+  delta: string;
+  positive: boolean; // controls green (true) vs muted-red (false) delta color
+}
+
+export interface CaseLever {
+  title: string;
+  text: string;
+}
+
+export interface CaseStudy {
+  kind: string; // mono chip, e.g. "Google Ads · Performance Max"
+  title: string;
+  summary: string;
+  periodFromLabel: string;
+  periodFromValue: string;
+  periodToLabel: string;
+  periodToValue: string;
+  highlights: CaseHighlight[];
+  metrics: CaseMetric[];
+  levers: CaseLever[];
+  stack: string; // small mono footer line
+}
+
 export interface Dictionary {
   meta: { title: string; description: string };
   eyebrow: string;
@@ -46,11 +78,14 @@ export interface Dictionary {
   sections: {
     about: string;
     experience: string;
+    cases: string;
     toolkit: string;
     details: string;
   };
   aboutLead: LeadSegment[];
   experience: ExperienceItem[];
+  cases: CaseStudy[];
+  caseLeversLabel: string;
   toolGroups: ToolGroup[];
   detailKickers: { education: string; languages: string };
   education: { school: string; degree: string; period: string };

@@ -125,10 +125,107 @@ export default async function Home({
         </div>
       </section>
 
+      {/* ───────────── CASES ───────────── */}
+      <section className="section" id="cases">
+        <div className="shell section__head">
+          <span className="section__index">03</span>
+          <h2 className="section__title">{dict.sections.cases}</h2>
+        </div>
+        <div className="shell cases">
+          {dict.cases.map((study, i) => (
+            <Reveal className="case" key={study.title} delay={i * 80}>
+              <div className="case__head">
+                <span className="case__kind">{study.kind}</span>
+                <h3 className="case__title">{study.title}</h3>
+                <p className="case__summary">{study.summary}</p>
+                <div className="case__period">
+                  <span className="case__period-pill">
+                    <span className="case__period-label">
+                      {study.periodFromLabel}
+                    </span>
+                    <span className="case__period-value">
+                      {study.periodFromValue}
+                    </span>
+                  </span>
+                  <span className="case__period-arrow" aria-hidden="true">
+                    →
+                  </span>
+                  <span className="case__period-pill">
+                    <span className="case__period-label">
+                      {study.periodToLabel}
+                    </span>
+                    <span className="case__period-value">
+                      {study.periodToValue}
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="case__highlights">
+                {study.highlights.map((hl, j) => (
+                  <div className="case-highlight" key={j}>
+                    <span className="case-highlight__value">{hl.value}</span>
+                    <span className="case-highlight__text">{hl.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="case__metrics">
+                {study.metrics.map((m, j) => (
+                  <div className="case-metric" key={j}>
+                    <span className="case-metric__label">{m.label}</span>
+                    <div className="case-metric__values">
+                      <span className="case-metric__before">{m.before}</span>
+                      <span
+                        className="case-metric__arrow"
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
+                      <span className="case-metric__after">{m.after}</span>
+                    </div>
+                    <span
+                      className={`case-metric__delta ${
+                        m.positive
+                          ? "case-metric__delta--up"
+                          : "case-metric__delta--down"
+                      }`}
+                    >
+                      {m.delta}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="case__levers">
+                <span className="case__levers-kicker">
+                  {dict.caseLeversLabel}
+                </span>
+                <ol className="case-levers__list">
+                  {study.levers.map((lever, j) => (
+                    <li className="case-lever" key={j}>
+                      <span className="case-lever__num">
+                        <span>{j + 1}</span>
+                      </span>
+                      <div className="case-lever__body">
+                        <h4 className="case-lever__title">{lever.title}</h4>
+                        <p className="case-lever__text">{lever.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <p className="case__stack">{study.stack}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ───────────── TOOLKIT ───────────── */}
       <section className="section" id="toolkit">
         <div className="shell section__head">
-          <span className="section__index">03</span>
+          <span className="section__index">04</span>
           <h2 className="section__title">{dict.sections.toolkit}</h2>
         </div>
         <div className="shell toolkit">
@@ -150,7 +247,7 @@ export default async function Home({
       {/* ───────────── EDUCATION + LANGUAGES ───────────── */}
       <section className="section" id="details">
         <div className="shell section__head">
-          <span className="section__index">04</span>
+          <span className="section__index">05</span>
           <h2 className="section__title">{dict.sections.details}</h2>
         </div>
         <div className="shell details">
