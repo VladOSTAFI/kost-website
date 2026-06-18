@@ -31,8 +31,6 @@ export default async function Home({
             </span>
           </h1>
 
-          <p className="hero__role">{dict.role}</p>
-
           <p className="hero__tagline">{dict.tagline}</p>
 
           <div className="hero__actions">
@@ -66,13 +64,13 @@ export default async function Home({
         </div>
       </header>
 
-      {/* ───────────── STATS ───────────── */}
+      {/* ───────────── KEY SKILLS ───────────── */}
       <section className="stats">
         <div className="shell stats__grid">
-          {dict.stats.map((stat, i) => (
-            <Reveal className="stat" key={stat.label} delay={i * 90}>
-              <span className="stat__value">{stat.value}</span>
-              <span className="stat__label">{stat.label}</span>
+          {dict.keySkills.map((skill, i) => (
+            <Reveal className="skillset" key={skill.name} delay={i * 90}>
+              <span className="skillset__name">{skill.name}</span>
+              <span className="skillset__items">{skill.items}</span>
             </Reveal>
           ))}
         </div>
@@ -135,7 +133,6 @@ export default async function Home({
           {dict.cases.map((study, i) => (
             <Reveal className="case" key={study.title} delay={i * 80}>
               <div className="case__head">
-                <span className="case__kind">{study.kind}</span>
                 <h3 className="case__title">{study.title}</h3>
                 <p className="case__summary">{study.summary}</p>
                 <div className="case__period">
@@ -222,32 +219,10 @@ export default async function Home({
         </div>
       </section>
 
-      {/* ───────────── TOOLKIT ───────────── */}
-      <section className="section" id="toolkit">
-        <div className="shell section__head">
-          <span className="section__index">04</span>
-          <h2 className="section__title">{dict.sections.toolkit}</h2>
-        </div>
-        <div className="shell toolkit">
-          {dict.toolGroups.map((group, i) => (
-            <Reveal className="toolgroup" key={group.title} delay={i * 80}>
-              <h3 className="toolgroup__title">{group.title}</h3>
-              <ul className="toolgroup__list">
-                {group.items.map((item) => (
-                  <li className="tool" key={item}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* ───────────── EDUCATION + LANGUAGES ───────────── */}
       <section className="section" id="details">
         <div className="shell section__head">
-          <span className="section__index">05</span>
+          <span className="section__index">04</span>
           <h2 className="section__title">{dict.sections.details}</h2>
         </div>
         <div className="shell details">
@@ -272,6 +247,28 @@ export default async function Home({
               ))}
             </ul>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ───────────── TOOLKIT ───────────── */}
+      <section className="section" id="toolkit">
+        <div className="shell section__head">
+          <span className="section__index">05</span>
+          <h2 className="section__title">{dict.sections.toolkit}</h2>
+        </div>
+        <div className="shell toolkit">
+          {dict.toolGroups.map((group, i) => (
+            <Reveal className="toolgroup" key={group.title} delay={i * 80}>
+              <h3 className="toolgroup__title">{group.title}</h3>
+              <ul className="toolgroup__list">
+                {group.items.map((item) => (
+                  <li className="tool" key={item}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
         </div>
       </section>
 

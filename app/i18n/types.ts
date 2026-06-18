@@ -1,6 +1,6 @@
-export interface Stat {
-  value: string;
-  label: string;
+export interface SkillSet {
+  name: string;
+  items: string;
 }
 
 export interface LeadSegment {
@@ -44,7 +44,6 @@ export interface CaseLever {
 }
 
 export interface CaseStudy {
-  kind: string; // mono chip, e.g. "Google Ads · Performance Max"
   title: string;
   summary: string;
   periodFromLabel: string;
@@ -63,7 +62,6 @@ export interface Dictionary {
   firstName: string;
   lastName: string;
   fullName: string;
-  role: string;
   tagline: string;
   cta: { email: string; linkedin: string };
   heroMeta: { basedIn: string; email: string; phone: string };
@@ -74,7 +72,7 @@ export interface Dictionary {
     linkedin: string;
     linkedinLabel: string;
   };
-  stats: Stat[];
+  keySkills: SkillSet[];
   sections: {
     about: string;
     experience: string;
