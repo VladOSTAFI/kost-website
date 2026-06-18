@@ -88,7 +88,7 @@ export interface Dictionary {
   detailKickers: { education: string; languages: string };
   education: { school: string; degree: string; period: string };
   languages: LangPair[];
-  contact: { kicker: string; headline: string; copyright: string };
+  contact: { kicker: string; copyright: string };
   login: {
     eyebrow: string;
     title: string;

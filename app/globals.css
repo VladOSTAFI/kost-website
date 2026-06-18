@@ -568,18 +568,18 @@ mark {
   position: relative;
   background: var(--ink);
   color: var(--bg);
-  padding-block: clamp(4rem, 11vw, 8rem);
+  padding-block: clamp(2.4rem, 5vw, 3.6rem);
   overflow: hidden;
 }
 .contact__glow {
   position: absolute;
-  bottom: -40%;
-  left: -10%;
-  width: min(640px, 90vw);
-  height: min(640px, 90vw);
+  bottom: -55%;
+  left: -8%;
+  width: min(440px, 70vw);
+  height: min(440px, 70vw);
   background: radial-gradient(
     circle,
-    rgba(204, 163, 255, 0.55) 0%,
+    rgba(204, 163, 255, 0.5) 0%,
     transparent 65%
   );
   filter: blur(10px);
@@ -592,19 +592,15 @@ mark {
 .contact .eyebrow {
   color: var(--accent);
 }
-.contact__headline {
-  font-family: var(--font-display);
-  font-weight: 450;
-  font-size: clamp(2rem, 6vw, 4rem);
-  line-height: 1.05;
-  margin: 1.2rem 0 2rem;
-  max-width: 16ch;
-  font-variation-settings: "opsz" 90, "WONK" 1;
+.contact__lead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 .contact__email {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
   color: var(--accent);
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s var(--ease);
@@ -615,10 +611,11 @@ mark {
 .contact__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.4rem 2.4rem;
-  margin-top: 2.8rem;
+  align-items: center;
+  gap: 0.7rem 1.8rem;
+  margin-top: 1.4rem;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
   color: rgba(246, 243, 238, 0.78);
 }
@@ -626,9 +623,9 @@ mark {
   color: var(--accent);
 }
 .contact__copyright {
-  margin-top: 3rem;
+  margin-top: 1.6rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(246, 243, 238, 0.45);

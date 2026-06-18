@@ -263,7 +263,6 @@ const en: Dictionary = {
   ],
   contact: {
     kicker: "Let's work together",
-    headline: "Ready to make your marketing measurable?",
     copyright: "© Kristina Ostafi. Built with care.",
   },
   login: {

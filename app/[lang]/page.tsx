@@ -275,12 +275,13 @@ export default async function Home({
       {/* ───────────── CONTACT / FOOTER ───────────── */}
       <footer className="contact" id="contact">
         <div className="contact__glow" aria-hidden="true" />
-        <div className="shell">
-          <p className="eyebrow">{dict.contact.kicker}</p>
-          <h2 className="contact__headline">{dict.contact.headline}</h2>
-          <a className="contact__email" href={`mailto:${c.email}`}>
-            {c.email}
-          </a>
+        <div className="shell contact__inner">
+          <div className="contact__lead">
+            <p className="eyebrow">{dict.contact.kicker}</p>
+            <a className="contact__email" href={`mailto:${c.email}`}>
+              {c.email}
+            </a>
+          </div>
 
           <div className="contact__links">
             <a href={telHref}>{c.phone}</a>
